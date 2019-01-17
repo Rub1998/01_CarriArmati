@@ -44,7 +44,8 @@ void ATankControllerCPP::Mira()
 
 	if (TrovaVista(Hitlocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Posizione Mirino %s"), *Hitlocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Posizione Mirino %s"), *Hitlocation.ToString());
+		GetTank()->AimAt(Hitlocation);
 
 	}
 
@@ -59,17 +60,18 @@ bool ATankControllerCPP::TrovaVista(FVector& loc)
 	FVector2D AimOnScreen = (FVector2D(ViewPortX*MirinoX, ViewPortY*MirinoY));
 
 	// convertire zona mirata in un FVector che miri ad una zona 3D
-	UE_LOG(LogTemp, Warning, TEXT("Posizione schermo %s"), *AimOnScreen.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Posizione schermo %s"), *AimOnScreen.ToString());
 
 	FVector Direzione;
 	if (TrovaDirezioneVista(AimOnScreen, Direzione))
 	{
 
 	// creare line trace tra camera e tale punto
-	//TrovaHitVista(Direzione);
+		TrovaHitVista(Direzione, loc);
+		return true;
 	}
-	loc = FVector(1.0);
-	return this;
+	loc = FVector(0,0,0);
+	return false;
 }
 
 bool ATankControllerCPP::TrovaDirezioneVista(FVector2D Mirino, FVector& DirezioneVista)

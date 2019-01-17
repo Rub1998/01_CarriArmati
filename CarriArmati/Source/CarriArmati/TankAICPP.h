@@ -22,6 +22,10 @@ class CARRIARMATI_API ATankAICPP : public AAIController
 	ATankCPP* GetTank();
 
 	ATankCPP* GetPlayerTank();
-	
-	
+
+	virtual void Tick(float deltatime) override;
+
+
+
+
 };

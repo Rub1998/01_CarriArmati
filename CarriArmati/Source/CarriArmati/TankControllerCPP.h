@@ -32,7 +32,7 @@ class CARRIARMATI_API ATankControllerCPP : public APlayerController
 protected:
 
 	    UPROPERTY(EditAnywhere, Category = "SetUp")
-		float LineTraceRange = 1000000.f;
+		float LineTraceRange = 1000000.f; 
 
 
 };

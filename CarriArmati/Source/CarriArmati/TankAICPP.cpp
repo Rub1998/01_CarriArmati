@@ -33,11 +33,18 @@ ATankCPP* ATankAICPP::GetPlayerTank()
 
 	return Cast<ATankCPP>(Controller->GetPawn());
 
-
-
 }
 
+void ATankAICPP::Tick(float deltatime)
+{
+	Super::Tick(deltatime);
+	if(GetPlayerTank())
+	{
+		GetTank()->AimAt(GetPlayerTank()->GetActorLocation());
 
+
+	}
+}
 
 
 
