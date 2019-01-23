@@ -12,7 +12,7 @@ class CARRIARMATI_API ATankCPP : public APawn
 {
 	GENERATED_BODY()
 
-		FORCEINLINE UStaticMeshComponent* GetCannone() { return Cannone; }
+		FORCEINLINE UTorrettaMesh* GetCannone() { return Cannone; }
 
 
 public:
@@ -38,9 +38,13 @@ public:
 protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetCannone(UStaticMeshComponent* Set);
+	void SetCannone(UTorrettaMesh* Set);
 
-	UStaticMeshComponent* Cannone = nullptr;
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void SetTorre(UTorrettaMesh* Set);
+
+	UTorrettaMesh* Cannone = nullptr;
+	UTorrettaMesh* Torre = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
 		float Vellancio = 100000;

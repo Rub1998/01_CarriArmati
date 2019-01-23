@@ -13,6 +13,26 @@ UAimingCPP::UAimingCPP()
 	// ...
 }
 
+void UAimingCPP::MuoviCannone(FVector AimDirection)
+{
+	auto Rotazione = Cannone->GetForwardVector().Rotation();
+	auto AimRotation = AimDirection.Rotation();
+	auto deltarotation = AimRotation - Rotazione;
+
+	Cannone->Eleva(deltarotation.Pitch);
+	if (FMath::Abs(deltarotation.Yaw) > 180)
+	{
+		Torre->Ruota(-deltarotation.Yaw);
+	}
+	else
+	{
+		Torre->Ruota(deltarotation.Yaw);
+	}
+	UE_LOG(LogTemp, Warning, TEXT("il barrel %s mira a %s"), *Rotazione.ToString(), *AimRotation.ToString());
+
+
+}
+
 
 // Called when the game starts
 void UAimingCPP::BeginPlay()
@@ -38,10 +58,8 @@ void UAimingCPP::AimAt(FVector HitLocation, float Vellancio)
 
 	FVector Toss;
 	FVector Start = Cannone->GetSocketLocation(FName("fuoco"));
-	FCollisionResponseParams fake_param;
-	TArray <AActor*>         fake_ignore;
 
-	UGameplayStatics::SuggestProjectileVelocity
+	bool result = UGameplayStatics::SuggestProjectileVelocity
 	(
 		this,
 		Toss,
@@ -51,15 +69,24 @@ void UAimingCPP::AimAt(FVector HitLocation, float Vellancio)
 		false,
 		0,
 		0,
-		ESuggestProjVelocityTraceOption::DoNotTrace,
-		fake_param,
-		fake_ignore,
-		true
+		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
+
+	if (result)
+	{
+		FVector AimDirection = Toss.GetSafeNormal();
+		MuoviCannone(AimDirection);
+	}
+
 
 }
 
-void UAimingCPP::SetCannone(UStaticMeshComponent* Set)
+void UAimingCPP::SetCannone(UTorrettaMesh* Set)
 {
 	Cannone = Set;
+}
+
+void UAimingCPP::SetTorre(UTorrettaMesh* Set)
+{
+	Torre = Set;
 }

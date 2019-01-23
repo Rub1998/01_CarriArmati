@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "TorrettaMesh.h"
 #include "AimingCPP.generated.h"
 
 
@@ -21,14 +22,18 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void MuoviCannone(FVector AimDirection);
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AimAt(FVector HitLocation,float Vellancio);
 
-	void SetCannone(UStaticMeshComponent* Set);
+	void SetCannone(UTorrettaMesh* Set);
+	void SetTorre(UTorrettaMesh* Set);
 
-	UStaticMeshComponent * Cannone = nullptr;
+	UTorrettaMesh * Cannone = nullptr;
+	UTorrettaMesh * Torre = nullptr;
 
 };

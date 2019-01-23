@@ -14,10 +14,6 @@ void ATankAICPP::BeginPlay()
 
 	UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *Bersaglio->GetName());
 
-
-
-
-
 }
 
 

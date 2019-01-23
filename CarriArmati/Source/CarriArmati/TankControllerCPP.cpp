@@ -99,7 +99,7 @@ bool ATankControllerCPP::TrovaHitVista(FVector DirezioneVista, FVector&HitLocati
 		return true;
         }
 
-	HitLocation = FVector(0, 0, 0);
+	//HitLocation = FVector(0, 0, 0);
 
 	return false;
 

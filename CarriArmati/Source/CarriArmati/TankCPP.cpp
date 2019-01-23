@@ -39,7 +39,12 @@ void ATankCPP::AimAt(FVector HitLocation)
 	Aiming->AimAt(HitLocation,Vellancio);
 }
 
-void ATankCPP::SetCannone(UStaticMeshComponent* Set)
+void ATankCPP::SetCannone(UTorrettaMesh* Set)
 {
 	Aiming->SetCannone(Set);
+}
+
+void ATankCPP::SetTorre(UTorrettaMesh* Set)
+{
+	Aiming->SetTorre(Set);
 }
