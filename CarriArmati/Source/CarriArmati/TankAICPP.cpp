@@ -2,6 +2,7 @@
 
 #include "TankAICPP.h"
 
+
 void ATankAICPP::BeginPlay()
 {
 	Super::BeginPlay();
@@ -12,7 +13,9 @@ void ATankAICPP::BeginPlay()
 
 	if (!CarroControllato || !Bersaglio) return;
 
-	UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *Bersaglio->GetName());
+	Timer = FMath::FRandRange(4, 8);
+
+	//UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *Bersaglio->GetName());
 
 }
 
@@ -37,10 +40,17 @@ void ATankAICPP::Tick(float deltatime)
 	if(GetPlayerTank())
 	{
 		GetTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	
+		if (Timer > 0) Timer -= deltatime;
+		else
+		{
+			GetTank()->SparaReal();
+			Timer = FMath::FRandRange(4, 8);
+		}
 
+		MoveToActor(GetPlayerTank(),RDistanza);
 
 	}
 }
-
 
 

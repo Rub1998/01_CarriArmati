@@ -16,7 +16,7 @@ UAimingCPP::UAimingCPP()
 void UAimingCPP::MuoviCannone(FVector AimDirection)
 {
 	auto Rotazione = Cannone->GetForwardVector().Rotation();
-	auto AimRotation = AimDirection.Rotation();
+	auto AimRotation   = AimDirection.Rotation();
 	auto deltarotation = AimRotation - Rotazione;
 
 	Cannone->Eleva(deltarotation.Pitch);
@@ -28,7 +28,7 @@ void UAimingCPP::MuoviCannone(FVector AimDirection)
 	{
 		Torre->Ruota(deltarotation.Yaw);
 	}
-	UE_LOG(LogTemp, Warning, TEXT("il barrel %s mira a %s"), *Rotazione.ToString(), *AimRotation.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("il barrel %s mira a %s"), *Rotazione.ToString(), *AimRotation.ToString());
 
 
 }
@@ -90,3 +90,5 @@ void UAimingCPP::SetTorre(UTorrettaMesh* Set)
 {
 	Torre = Set;
 }
+
+

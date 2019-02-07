@@ -10,7 +10,6 @@ ATankCPP::ATankCPP()
 	PrimaryActorTick.bCanEverTick = true;
 	Aiming = CreateDefaultSubobject<UAimingCPP>(FName("Aiming"));
 
-
 }
 
 // Called when the game starts or when spawned
@@ -25,6 +24,7 @@ void ATankCPP::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (reload > 0) reload -= DeltaTime;
 }
 
 // Called to bind functionality to input
@@ -42,9 +42,38 @@ void ATankCPP::AimAt(FVector HitLocation)
 void ATankCPP::SetCannone(UTorrettaMesh* Set)
 {
 	Aiming->SetCannone(Set);
+	Cannone = Set;
 }
 
 void ATankCPP::SetTorre(UTorrettaMesh* Set)
 {
 	Aiming->SetTorre(Set);
+}
+
+void ATankCPP::SparaReal()
+{
+	if (!ProjectileBP)
+	{
+		//UE_LOG(LogTemp, Error, TEXT("nessun proiettile selezionato"));
+	}
+	else
+	{
+
+		if (reload <= 0)
+		{
+			AProiettile* Proiettile = GetWorld()->SpawnActor<AProiettile>(
+				ProjectileBP,
+				Cannone->GetSocketLocation(FName("fuoco")),
+				Cannone->GetSocketRotation(FName("fuoco")));
+
+			Proiettile->Lancio(Vellancio);
+
+			reload = reload_time;
+
+		}
+
+
+	}
+
+	
 }

@@ -10,13 +10,13 @@ void ATankControllerCPP::BeginPlay()
 
 	if (!CarroControllato)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("non ho un tank"));
+		//UE_LOG(LogTemp, Warning, TEXT("non ho un tank"));
 
 	}
 	else
 	{
 
-		UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *CarroControllato->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *CarroControllato->GetName());
 
 	}
 

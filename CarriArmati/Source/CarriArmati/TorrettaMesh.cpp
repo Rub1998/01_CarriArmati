@@ -5,7 +5,7 @@
 
 void UTorrettaMesh::Eleva(float VelRelativa)
 {
-	UE_LOG(LogTemp, Warning, TEXT("vel relativa %f"), VelRelativa);
+	//UE_LOG(LogTemp, Warning, TEXT("vel relativa %f"), VelRelativa);
 
 	VelRelativa = FMath::Clamp<float>(VelRelativa, -1, 1);
 

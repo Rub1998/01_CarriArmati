@@ -25,7 +25,9 @@ class CARRIARMATI_API ATankAICPP : public AAIController
 
 	virtual void Tick(float deltatime) override;
 
+	float Timer = 0;
 
-
+	UPROPERTY(EditAnywhere, Category = "Setup")
+		float RDistanza = 300;
 
 };

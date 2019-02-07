@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "TorrettaMesh.h"
+#include "Proiettile.h"
 #include "AimingCPP.generated.h"
 
 
