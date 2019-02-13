@@ -20,21 +20,24 @@ void ATankControllerCPP::BeginPlay()
 
 	}
 
+	MiraCarro = GetTank()->FindComponentByClass<UAimingCPP>();
+
+	if (MiraCarro) TrovaMirino(MiraCarro);
+	else UE_LOG(LogTemp, Warning, TEXT("Aiming mancante"));
+
 }
 
 void ATankControllerCPP::Tick(float deltatime)
 {
 	Super::Tick(deltatime);
+	//UE_LOG(LogTemp, Warning, TEXT("Posizione Mirino "));
 	Mira();
-
-
 }
 
 ATankCPP* ATankControllerCPP::GetTank()
 {
 	return Cast<ATankCPP>(GetPawn());
 }
-
 
 void ATankControllerCPP::Mira()
 {
@@ -44,12 +47,13 @@ void ATankControllerCPP::Mira()
 
 	if (TrovaVista(Hitlocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Posizione Mirino %s"), *Hitlocation.ToString());
-		GetTank()->AimAt(Hitlocation);
+		
+		Aim->AimAt(Hitlocation);
 
 	}
 
 }
+
 
 bool ATankControllerCPP::TrovaVista(FVector& loc)
 {
@@ -102,5 +106,11 @@ bool ATankControllerCPP::TrovaHitVista(FVector DirezioneVista, FVector&HitLocati
 	//HitLocation = FVector(0, 0, 0);
 
 	return false;
+
+}
+void ATankControllerCPP::SetAim(UAimingCPP* Set)
+{
+	Aim = Set;
+
 
 }

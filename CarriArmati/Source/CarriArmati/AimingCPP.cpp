@@ -38,7 +38,7 @@ void UAimingCPP::MuoviCannone(FVector AimDirection)
 void UAimingCPP::BeginPlay()
 {
 	Super::BeginPlay();
-
+	reload = reload_time;
 	// ...
 	
 }
@@ -49,10 +49,12 @@ void UAimingCPP::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (reload > 0) reload -= DeltaTime;
 	// ...
 }
 
-void UAimingCPP::AimAt(FVector HitLocation, float Vellancio)
+
+void UAimingCPP::AimAt(FVector HitLocation)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("il Carro %s mira a %s con il comp %s"), *GetOwner()->GetName(), *HitLocation.ToString(),*Cannone->GetComponentLocation().ToString());
 
@@ -91,4 +93,51 @@ void UAimingCPP::SetTorre(UTorrettaMesh* Set)
 	Torre = Set;
 }
 
+void UAimingCPP::SparaReal()
+{
+	if (!ProjectileBP)
+	{
+		UE_LOG(LogTemp, Error, TEXT("nessun proiettile selezionato"));
+	}
+	else
+	{
 
+		if (reload <= 0)
+		{
+			AProiettile* Proiettile = GetWorld()->SpawnActor<AProiettile>(
+				ProjectileBP,
+				Cannone->GetSocketLocation(FName("fuoco")),
+				Cannone->GetSocketRotation(FName("fuoco")));
+
+			Proiettile->Lancio(Vellancio);
+
+			reload = reload_time;
+
+		}
+
+
+	}
+
+
+}
+
+void UAimingCPP::SetStatus(uint8 nuovo_stato)
+{
+	switch (nuovo_stato)
+	{
+		case 0:
+		   myaim = EaimingStatus::ricarica;
+		break;
+
+		case 1:
+			myaim = EaimingStatus::movimento;
+		break;
+
+		case 2:
+			myaim = EaimingStatus::mira;
+		break;
+
+	}
+
+
+}

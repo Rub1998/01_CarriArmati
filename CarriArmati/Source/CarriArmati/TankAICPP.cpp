@@ -17,6 +17,7 @@ void ATankAICPP::BeginPlay()
 
 	//UE_LOG(LogTemp, Warning, TEXT("controllo il tank %s"), *Bersaglio->GetName());
 
+	//var1.Equals(var2, valore);
 }
 
 
@@ -37,14 +38,15 @@ ATankCPP* ATankAICPP::GetPlayerTank()
 void ATankAICPP::Tick(float deltatime)
 {
 	Super::Tick(deltatime);
-	if(GetPlayerTank())
+
+	if(GetPlayerTank() && Aim)
 	{
-		GetTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		Aim->AimAt(GetPlayerTank()->GetActorLocation());
 	
 		if (Timer > 0) Timer -= deltatime;
 		else
 		{
-			GetTank()->SparaReal();
+			Aim->SparaReal();
 			Timer = FMath::FRandRange(4, 8);
 		}
 
@@ -53,4 +55,7 @@ void ATankAICPP::Tick(float deltatime)
 	}
 }
 
-
+void ATankAICPP::SetAim(UAimingCPP* Set)
+{
+	Aim = Set;
+}

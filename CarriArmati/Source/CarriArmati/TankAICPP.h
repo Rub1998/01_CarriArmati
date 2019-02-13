@@ -9,9 +9,7 @@
 #include "TankControllerCPP.h"
 #include "TankAICPP.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class CARRIARMATI_API ATankAICPP : public AAIController
 {
@@ -19,9 +17,11 @@ class CARRIARMATI_API ATankAICPP : public AAIController
 	
 	virtual void BeginPlay() override;
 
-	ATankCPP* GetTank();
+	//ATankCPP* GetTank();
 
 	ATankCPP* GetPlayerTank();
+
+	ATankCPP* GetTank();
 
 	virtual void Tick(float deltatime) override;
 
@@ -29,5 +29,10 @@ class CARRIARMATI_API ATankAICPP : public AAIController
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		float RDistanza = 300;
+
+		UFUNCTION(BlueprintCallable, Category = "Setup")
+			void SetAim(UAimingCPP* Set);
+
+		UAimingCPP* Aim = nullptr;
 
 };

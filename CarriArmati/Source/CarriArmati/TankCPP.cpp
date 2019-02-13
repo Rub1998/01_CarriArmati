@@ -8,7 +8,7 @@ ATankCPP::ATankCPP()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	Aiming = CreateDefaultSubobject<UAimingCPP>(FName("Aiming"));
+	//Aiming = CreateDefaultSubobject<UAimingCPP>(FName("Aiming"));
 
 }
 
@@ -18,13 +18,13 @@ void ATankCPP::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
+/*
 // Called every frame
 void ATankCPP::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (reload > 0) reload -= DeltaTime;
+	//if (reload > 0) reload -= DeltaTime;
 }
 
 // Called to bind functionality to input
@@ -77,3 +77,4 @@ void ATankCPP::SparaReal()
 
 	
 }
+*/

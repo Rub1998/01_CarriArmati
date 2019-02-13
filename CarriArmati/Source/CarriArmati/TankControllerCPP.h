@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankCPP.h"
+#include "AimingCPP.h"
 #include "TankControllerCPP.generated.h"
 
 /**
@@ -16,6 +17,7 @@ class CARRIARMATI_API ATankControllerCPP : public APlayerController
 	GENERATED_BODY()
 
 		virtual void BeginPlay() override;
+
 	    ATankCPP* GetTank();
 	
 		virtual void Tick(float deltatime) override;
@@ -28,11 +30,27 @@ class CARRIARMATI_API ATankControllerCPP : public APlayerController
 		bool TrovaVista(FVector& loc);
 		bool TrovaDirezioneVista(FVector2D Mirino, FVector& DirezioneVista);
 		bool TrovaHitVista(FVector DirezioneVista, FVector&HitLocation);
+
+		UFUNCTION(BlueprintCallable, Category = "Setup")
+			void SetAim(UAimingCPP* Set);
+
+		UAimingCPP* Aim = nullptr;
 		
 protected:
 
 	    UPROPERTY(EditAnywhere, Category = "SetUp")
 		float LineTraceRange = 1000000.f; 
+
+public:
+
+	UPROPERTY(EditAnywhere)
+		UAimingCPP* MiraCarro = nullptr;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "SetUp")
+		void TrovaMirino(UAimingCPP* MirinoRef);
+
+
+
 
 
 };
